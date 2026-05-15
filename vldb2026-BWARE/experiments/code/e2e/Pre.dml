@@ -1,3 +1,0 @@
-X = read($1)
-
-write($2, format$3)

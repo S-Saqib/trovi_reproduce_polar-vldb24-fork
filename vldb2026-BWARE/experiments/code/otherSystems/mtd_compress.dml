@@ -1,3 +1,0 @@
-f = read($1)
-
-write(f, $1+".cla", format="compressed")
