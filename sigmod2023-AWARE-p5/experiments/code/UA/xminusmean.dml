@@ -1,7 +1,0 @@
-x = read($1)
-
-print(max(x))
-for(i in 1:$2) {
-    res =  x - colMeans(x) 
-}
-print(toString(colSums(res)))
