@@ -1,2 +1,0 @@
-# cython: language_level=3, cdivision=True, boundscheck=False, wraparound=False, nonecheck=False, initializedcheck=False, infer_types=True
-cpdef simplify_by_agg_pip(double[:] y, Py_ssize_t nlags, Py_ssize_t kappa, double acf_threshold)
