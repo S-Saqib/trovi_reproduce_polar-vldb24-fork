@@ -1,1 +1,0 @@
-docker buildx build --platform linux/amd64 -t rsd8914/llm_adpt_serving .
