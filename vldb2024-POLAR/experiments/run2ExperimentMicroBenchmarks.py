@@ -186,7 +186,7 @@ def execute_benchmark_2():
 
 
 def execute_benchmark_3():
-    nruns = 20
+    nruns = 5
     cwd = os.getcwd()
     r = "0.01"
 
@@ -274,35 +274,35 @@ if __name__ == "__main__":
     sp.call(["mkdir", "-p", f"{os.getcwd()}/duckdb-polr/tmp"])
     pool = mp.Pool(min(mp.cpu_count(), 16))
 
-    idx = 0
-    for benchmark in ["imdb", "ssb"]:
-        for init_tuple_count in [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]:
-            pool.apply_async(execute_benchmark_0(idx, benchmark, init_tuple_count))
-            idx += 1
+    # idx = 0
+    # for benchmark in ["imdb", "ssb"]:
+    #     for init_tuple_count in [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]:
+    #         pool.apply_async(execute_benchmark_0(idx, benchmark, init_tuple_count))
+    #         idx += 1
 
-    for benchmark in benchmarks.keys():
-        for static_strategy in routing_strategies["static"]:
-            pool.apply_async(execute_benchmark_1, args=(idx, static_strategy, 0, benchmark))
-            idx += 1
-        for debug_strategy in routing_strategies["debug"]:
-            pool.apply_async(execute_benchmark_1, args=(idx, debug_strategy, 0, benchmark))
-            idx += 1
-        for dynamic_strategy in routing_strategies["dynamic"]:
-            for regret in regret_budgets:
-                pool.apply_async(execute_benchmark_1, args=(idx, dynamic_strategy, regret, benchmark))
-                idx += 1
+    # for benchmark in benchmarks.keys():
+    #     for static_strategy in routing_strategies["static"]:
+    #         pool.apply_async(execute_benchmark_1, args=(idx, static_strategy, 0, benchmark))
+    #         idx += 1
+    #     for debug_strategy in routing_strategies["debug"]:
+    #         pool.apply_async(execute_benchmark_1, args=(idx, debug_strategy, 0, benchmark))
+    #         idx += 1
+    #     for dynamic_strategy in routing_strategies["dynamic"]:
+    #         for regret in regret_budgets:
+    #             pool.apply_async(execute_benchmark_1, args=(idx, dynamic_strategy, regret, benchmark))
+    #             idx += 1
 
-    pool.close()
-    pool.join()
+    # pool.close()
+    # pool.join()
 
-    for benchmark in benchmarks.keys():
-        execute_benchmark_1(idx, "backpressure", 0, benchmark)
-        idx += 1
+    # for benchmark in benchmarks.keys():
+    #     execute_benchmark_1(idx, "backpressure", 0, benchmark)
+    #     idx += 1
 
-    sp.call(["rm", "-rf", f"{os.getcwd()}/duckdb-polr/tmp"])
-    sp.call(["mkdir", "-p", f"{os.getcwd()}/duckdb-polr/tmp"])
-    execute_benchmark_2()
-    sp.call(["rm", "-rf", f"{os.getcwd()}/duckdb-polr/tmp"])
-    sp.call(["mkdir", "-p", f"{os.getcwd()}/duckdb-polr/tmp"])
+    # sp.call(["rm", "-rf", f"{os.getcwd()}/duckdb-polr/tmp"])
+    # sp.call(["mkdir", "-p", f"{os.getcwd()}/duckdb-polr/tmp"])
+    # execute_benchmark_2()
+    # sp.call(["rm", "-rf", f"{os.getcwd()}/duckdb-polr/tmp"])
+    # sp.call(["mkdir", "-p", f"{os.getcwd()}/duckdb-polr/tmp"])
     execute_benchmark_3()
-    execute_benchmark_4()
+    # execute_benchmark_4()
